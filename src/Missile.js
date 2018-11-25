@@ -1,29 +1,36 @@
 class Missile {
 
-  constructor(game) {
-    this.game = game;
-
+  constructor(Game) {
+    this.game = Game.game;
+    this.player = Game.player.player;
+    this.missiles = Game.missiles.missiles;
     this.init();
   }
 
   init() {
-    this.missile = this.game.add.sprite(10, 10, 'missile');
+    // console.log(this.player)
+    // console.log(this.player)
+    this.missile = this.game.add.sprite(this.player.x, this.player.y, 'missile');
     this.missile.anchor.setTo(0.5, 0.5);
     this.missile.scale.setTo(0.5, 0.5);
     this.game.physics.arcade.enable(this.missile);
-    this.missile.angle = this.game.player.angle + 90;
-    // game.physics.arcade.velocityFromRotation(player.rotation + angleOffset, 600, projectile.body.velocity);
-    // projectile.scale.x *= -1; // flip sprite
-    // projectile.checkWorldBounds = true;
-    // projectile.events.onOutOfBounds.add(destroyProjectile);
-    // projectiles.add(projectile);
+    this.missile.angle = this.player.angle + 90;
+    this.game.physics.arcade.velocityFromRotation(this.player.rotation, 600, this.missile.body.velocity);
+    // if missile hits a wall
+    this.missile.checkWorldBounds = true;
+    this.missile.events.onOutOfBounds.add(this.destroy.bind(this));
+  }
 
-    // add trail emitter
-    // let trail = projectile.addChild(game.make.sprite(0,20, 'rocket_trail'));
-    // trail.alpha = 0.8
-    // trail.anchor.setTo(0.5, 0.5);
-    // trail.scale.setTo(0.5, 0.5);
-    // trail.rotation += Math.PI * 0.5; // rotate child to match parent rotation
+  destroy() {
+    // console.log('destroying missile')
+    this.missile.kill();
+  }
+
+  revive() {
+    // console.log('reviving missile')
+    this.missile.reset(this.player.x, this.player.y);
+    this.missile.angle = this.player.angle + 90;
+    this.game.physics.arcade.velocityFromRotation(this.player.rotation, 600, this.missile.body.velocity);
   }
 
   update() {

@@ -1,10 +1,12 @@
 class Player {
   constructor(game) {
     this.game = game;
+    this.fireCooldown = 100;
+    this.lastFiredTime = null;
   }
 
   preload() {
-    this.game.load.image('player', '../player.png');
+    this.game.load.image('player', '../assets/images/player.png');
   }
 
   create() {
@@ -37,15 +39,31 @@ class Player {
   checkInput() {
     // check player movement input
     let vel = this.player.body.velocity;
-    let velChangeAmount = 10;
+    let velChangeAmount = 3;
     let maxVel = 300;
 
+    // check if player is moving
     if(this.aKey.isDown && vel.x > -maxVel) vel.x -= velChangeAmount;
     if(this.dKey.isDown && vel.x < maxVel) vel.x += velChangeAmount;
     if(this.wKey.isDown && vel.y > -maxVel) vel.y -= velChangeAmount;
     if(this.sKey.isDown && vel.y < maxVel) vel.y += velChangeAmount;
 
-    if(this.spaceKey.isDown) this.game.missiles.launch();
+    // check if firing
+    if(this.spaceKey.isDown && this.game.time.time > this.lastFiredTime + this.fireCooldown) {
+      this.lastFiredTime = this.game.time.time;
+      this.game.missiles.launch();
+    } 
+
+    // if not moving slow velocity
+    if(!this.aKey.isDown && !this.dKey.isDown) {
+      if(vel.x < 0) vel.x += velChangeAmount;
+      else if(vel.x > 0) vel.x -= velChangeAmount;
+    }
+
+    if(!this.wKey.isDown && !this.sKey.isDown) {
+      if(vel.y < 0) vel.y += velChangeAmount;
+      else if(vel.y > 0) vel.y -= velChangeAmount;
+    } 
   }
 
   rotatePlayer(e) {
