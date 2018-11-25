@@ -1,9 +1,11 @@
 import game from '../main';
+import enemyTypes from '../EnemyTypes';
 
 class Pinwheel {
 
   constructor(game) {
     this.game = game.game;
+    this.typeData = enemyTypes[0];
     this.init();
   }
 
@@ -28,6 +30,10 @@ class Pinwheel {
     let yModifier = Math.round(Math.random()) * 2 - 1; // -1 or 1
     this.enemy.body.velocity.x = xModifier * velocity;  
     this.enemy.body.velocity.y = yModifier * velocity;
+  }
+
+  update() {
+    
   }
 }
 

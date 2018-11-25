@@ -34,17 +34,19 @@ class Game {
 
   checkCollisions() {
     this.game.physics.arcade.overlap(this.missiles.missileSprites, this.enemies.enemySprites, this.missileHitEnemy.bind(this));
-    this.game.physics.arcade.overlap(this.player.player, this.enemies.enemySprites, this.playerHitEnemy.bind(this));
+    this.game.physics.arcade.overlap(this.player.sprite, this.enemies.enemySprites, this.playerHitEnemy.bind(this));
   }
 
   missileHitEnemy(missile, enemy) {
     missile.kill();
     enemy.kill();
+    this.enemies.enemiesAlive--;
   }
 
   playerHitEnemy(player, enemy) {
     player.kill();
     enemy.kill();
+    this.game.physics.arcade.isPaused = true;
   }
 
 }

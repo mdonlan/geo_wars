@@ -20,11 +20,11 @@ class Player {
   }
 
   createPlayer() {
-    this.player = this.game.add.sprite(10, 10, 'player');
-    this.player.anchor.setTo(0.5, 0.5);
-    this.game.physics.arcade.enable(this.player);
-    this.player.body.setSize(20, 20, 10, 10);
-    this.player.body.collideWorldBounds = true;
+    this.sprite = this.game.add.sprite(10, 10, 'player');
+    this.sprite.anchor.setTo(0.5, 0.5);
+    this.game.physics.arcade.enable(this.sprite);
+    this.sprite.body.setSize(20, 20, 10, 10);
+    this.sprite.body.collideWorldBounds = true;
   }
 
   setupInput() {
@@ -38,7 +38,7 @@ class Player {
 
   checkInput() {
     // check player movement input
-    let vel = this.player.body.velocity;
+    let vel = this.sprite.body.velocity;
     let velChangeAmount = 3;
     let maxVel = 300;
 
@@ -68,7 +68,7 @@ class Player {
 
   rotatePlayer(e) {
     // when the mouse moves update the player angle
-    this.player.rotation = Math.atan2(e.clientY - this.player.y, e.clientX - this.player.x);
+    this.sprite.rotation = Math.atan2(e.clientY - this.sprite.y, e.clientX - this.sprite.x);
   }
 
 }

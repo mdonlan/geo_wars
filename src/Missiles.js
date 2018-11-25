@@ -17,9 +17,7 @@ class Missiles {
   }
 
   update() {
-    this.missileSprites.children.forEach((missile) => {
-      missile.update();
-    });
+    
   }
 
   launch() {

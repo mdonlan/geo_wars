@@ -2,7 +2,7 @@ class Missile {
 
   constructor(Game) {
     this.game = Game.game;
-    this.player = Game.player.player;
+    this.player = Game.player.sprite;
     this.missiles = Game.missiles.missiles;
     this.init();
   }
