@@ -34,6 +34,9 @@ class Player {
     this.aKey = this.game.input.keyboard.addKey(Phaser.KeyCode.A); // left
     this.sKey = this.game.input.keyboard.addKey(Phaser.KeyCode.S); // down
     this.dKey = this.game.input.keyboard.addKey(Phaser.KeyCode.D); // right
+    this.tKey = this.game.input.keyboard.addKey(Phaser.KeyCode.T); // pause
+    this.tKey.onDown.add(this.game.pause, this);
+
   }
 
   checkInput() {
