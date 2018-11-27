@@ -1,7 +1,7 @@
 class Player {
   constructor(game) {
     this.game = game;
-    this.fireCooldown = 100;
+    this.fireCooldown = 300;
     this.lastFiredTime = null;
   }
 

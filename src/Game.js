@@ -31,7 +31,7 @@ class Game {
 
     this.checkCollisions();
   }
-
+  
   checkCollisions() {
     this.game.physics.arcade.overlap(this.missiles.missileSprites, this.enemies.enemySprites, this.missileHitEnemy.bind(this));
     this.game.physics.arcade.overlap(this.player.sprite, this.enemies.enemySprites, this.playerHitEnemy.bind(this));
@@ -44,10 +44,13 @@ class Game {
   }
 
   playerHitEnemy(player, enemy) {
-    player.kill();
-    enemy.kill();
-    this.game.physics.arcade.isPaused = true;
+    if(enemy.instance.canCollide) {
+      player.kill();
+      enemy.kill();
+      this.game.physics.arcade.isPaused = true;
+    }
   }
+
 
 }
 

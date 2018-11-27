@@ -6,6 +6,14 @@ let enemyTypes = [
   {
     id: 1,
     name: 'diamond'
+  },
+  {
+    id: 2,
+    name: 'pinksquare'
+  },
+  {
+    id: 3,
+    name: 'snake'
   }
 ];
 

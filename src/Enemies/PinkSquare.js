@@ -1,16 +1,13 @@
-// import game from '../main';
 import EnemyTypes from '../EnemyTypes';
 
-class Diamond {
+class PinkSquare {
 
-  constructor(game, x, y) {
+  constructor(game) {
     this.game = game.game;
     this.player = game.player;
     this.enemies = game.enemies;
-    this.type = EnemyTypes[1];
-    this.x = x;
-    this.y = y;
-    this.speed = 100;
+    this.type = EnemyTypes[2];
+    this.speed = 300;
     this.canCollide = false;
 
     this.init();
@@ -22,7 +19,9 @@ class Diamond {
   }
 
   spawn() {
-    this.enemy = this.game.add.sprite(this.x, this.y, 'diamond');
+    let x = Math.floor(Math.random() * this.game.width);
+    let y = Math.floor(Math.random() * this.game.height);
+    this.enemy = this.game.add.sprite(x, y, 'pink_square');
     this.enemy.instance = this;
     this.enemy.anchor.setTo(0.5, 0.5);
     this.game.physics.arcade.enable(this.enemy);
@@ -40,4 +39,4 @@ class Diamond {
   }
 }
 
-export default Diamond;
+export default PinkSquare;
